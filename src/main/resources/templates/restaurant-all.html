@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurants</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+
+
+<div class="container w-50 p-3">
+    <h1 class="display-6">Restaurants</h1>
+
+
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="thead-dark">
+        <tr style="text-align: center; vertical-align: top" class="table-primary">
+            <th>Name</th>
+            <th>Type</th>
+            <th>Address</th>
+            <th> </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="restaurant : ${restaurants}" style="vertical-align: middle">
+            <td th:text="${restaurant.name}"></td>
+            <td th:text="${restaurant.type}"></td>
+            <td th:text="${restaurant.address}"></td>
+            <td style="text-align: center">
+                <a class="btn btn-primary"
+                   th:href="@{/reviews/show/{id}(id=${restaurant.id})}">Review</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

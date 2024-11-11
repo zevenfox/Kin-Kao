@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Kinkao Web Application</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+
+<div th:insert="~{fragments/header :: header}"></div>
+<div class="container">
+    <h1 class="display-6">Welcome to Kinkao</h1>
+
+    <p><span th:text="${greeting}"></span></p>
+
+    <div sec:authorize="isAuthenticated()">
+        <p>Khun <b><span sec:authentication="name"></span></b></p>
+        <a class="btn btn-primary" th:href="@{/logout}">Logout</a>
+    </div>
+    <div sec:authorize="isAnonymous()">
+        <a class="btn btn-primary" th:href="@{/login}">Login</a>
+        <a class="btn btn-light" th:href="@{/signup}">Sign Up</a>
+    </div>
+</div>
+
+</body>
+</html>

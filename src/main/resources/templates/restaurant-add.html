@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Restaurant</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+
+
+<div class="container w-50 p-3">
+    <h1 class="display-5">Add a Restaurant</h1>
+
+
+    <form th:action="@{/restaurants/add}" method="POST"
+          th:object="${restaurantRequest}">
+
+
+        <div class="mb-3">
+            <label for="inputName">Restaurant Name</label>
+            <input id="inputName" type="text" th:field="*{name}" class="form-control">
+            <div class="alert alert-warning" th:if="${#fields.hasErrors('name')}"
+                 th:errors="*{name}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="inputType">Type</label>
+            <input id="inputType" type="text" th:field="*{type}" class="form-control">
+            <div class="alert alert-warning" th:if="${#fields.hasErrors('type')}"
+                 th:errors="*{type}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="inputAddress">Address</label>
+            <input id="inputAddress" type="text" th:field="*{address}"
+                   class="form-control">
+            <div class="alert alert-warning" th:if="${#fields.hasErrors('address')}"
+                 th:errors="*{address}"></div>
+        </div>
+
+
+        <button id="submit-button" type="submit" class="btn btn-primary">
+            Add Restaurant
+        </button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Review</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+
+
+<div th:insert="~{fragments/header :: header}"></div>
+
+
+<div class="container w-50 p-3">
+    <h1 class="display-6" th:text="|${restaurant.name} Reviews|"></h1>
+
+
+    <br>
+    <p sec:authorize="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
+        <a class="btn btn-primary" th:href="@{/reviews/add/{id}(id=${restaurant.id})}">Add Review</a>
+    </p>
+
+
+    <table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th>Review</th>
+            <th>Rating</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="review : ${restaurant.reviews}">
+            <td th:text="${review.reviewText}"></td>
+            <td th:text="${review.rating}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>

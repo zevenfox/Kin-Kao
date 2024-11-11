@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Review</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+
+
+<div th:insert="~{fragments/header :: header}"></div>
+
+
+<div class="container w-50 p-3">
+    <h1 class="display-5">Add a Review</h1>
+
+
+    <form th:action="@{/reviews/add}" method="POST"
+          th:object="${reviewRequest}">
+
+
+
+
+        <input type="hidden" name="restaurantId" th:value="${restaurantId}"
+               id="restaurantId">
+
+
+        <div class="mb-3">
+            <label for="reviewTextInput">Review</label>
+            <input id="reviewTextInput" type="text" th:field="*{reviewText}"
+                   class="form-control">
+            <div class="alert alert-warning"
+                 th:if="${#fields.hasErrors('reviewText')}"
+                 th:errors="*{reviewText}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="ratingInput">Rating (1 - 5)</label>
+            <input id="ratingInput" type="number" th:field="*{rating}"
+                   class="form-control">
+            <div class="alert alert-warning"
+                 th:if="${#fields.hasErrors('rating')}"
+                 th:errors="*{rating}"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Review</button>
+    </form>
+</div>
+</body>
+</html>
